@@ -49,6 +49,13 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :avikav_net, :logger, [
+  {:handler, :avikav_net_sentry_handler, Sentry.LoggerHandler,
+   %{
+     config: %{metadata: [:file, :line]}
+   }}
+]
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

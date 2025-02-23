@@ -7,12 +7,13 @@ defmodule AvikavNet.Application do
 
   @impl true
   def start(_type, _args) do
+    Logger.add_handlers(:avikav_net)
+
     children = [
       AvikavNetWeb.Telemetry,
       AvikavNet.Repo,
       {Ecto.Migrator,
-        repos: Application.fetch_env!(:avikav_net, :ecto_repos),
-        skip: skip_migrations?()},
+       repos: Application.fetch_env!(:avikav_net, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:avikav_net, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: AvikavNet.PubSub},
       # Start a worker by calling: AvikavNet.Worker.start_link(arg)

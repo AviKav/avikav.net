@@ -93,3 +93,13 @@ if config_env() == :prod do
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
 end
+
+config :sentry,
+  # dsn: "https://public_key@app.getsentry.com/1",
+  dsn: System.get_env("SENTRY_DSN"),
+  environment_name: config_env(),
+  enable_source_code_context: true,
+  root_source_code_paths: [File.cwd!()],
+  tags: %{
+    env: "production"
+  }
