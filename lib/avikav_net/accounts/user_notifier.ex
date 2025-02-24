@@ -1,20 +1,22 @@
 defmodule AvikavNet.Accounts.UserNotifier do
-  import Swoosh.Email
+  # import Swoosh.Email
 
-  alias AvikavNet.Mailer
+  # alias AvikavNet.Mailer
 
   # Delivers the email using the application mailer.
-  defp deliver(recipient, subject, body) do
-    email =
-      new()
-      |> to(recipient)
-      |> from({"AvikavNet", "contact@example.com"})
-      |> subject(subject)
-      |> text_body(body)
+  defp deliver(_recipient, _subject, _body) do
+    # email =
+    #   new()
+    #   |> to(recipient)
+    #   |> from({"AvikavNet", "contact@example.com"})
+    #   |> subject(subject)
+    #   |> text_body(body)
 
-    with {:ok, _metadata} <- Mailer.deliver(email) do
-      {:ok, email}
-    end
+    # with {:ok, _metadata} <- Mailer.deliver(email) do
+    #   {:ok, email}
+    # end
+
+    {:ok, "noop"}
   end
 
   @doc """

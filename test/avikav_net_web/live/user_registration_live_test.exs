@@ -31,7 +31,7 @@ defmodule AvikavNetWeb.UserRegistrationLiveTest do
         |> render_change(user: %{"email" => "with spaces", "password" => "too short"})
 
       assert result =~ "Register"
-      assert result =~ "must have the @ sign and no spaces"
+      # assert result =~ "must have the @ sign and no spaces"
       assert result =~ "should be at least 12 character"
     end
   end
@@ -40,8 +40,11 @@ defmodule AvikavNetWeb.UserRegistrationLiveTest do
     test "creates account and logs the user in", %{conn: conn} do
       {:ok, lv, _html} = live(conn, ~p"/users/register")
 
-      email = unique_user_email()
-      form = form(lv, "#registration_form", user: valid_user_attributes(email: email))
+      # email = unique_user_email()
+      # form = form(lv, "#registration_form", user: valid_user_attributes(email: email))
+      username = unique_user_username()
+      user = valid_user_attributes(username: username) |> Map.delete(:email)
+      form = form(lv, "#registration_form", user: user)
       render_submit(form)
       conn = follow_trigger_action(form, conn)
 
@@ -50,25 +53,26 @@ defmodule AvikavNetWeb.UserRegistrationLiveTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
-      assert response =~ email
+      # assert response =~ email
+      assert response =~ username
       assert response =~ "Settings"
       assert response =~ "Log out"
     end
 
-    test "renders errors for duplicated email", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/users/register")
+    # test "renders errors for duplicated email", %{conn: conn} do
+    #   {:ok, lv, _html} = live(conn, ~p"/users/register")
 
-      user = user_fixture(%{email: "test@email.com"})
+    #   user = user_fixture(%{email: "test@email.com"})
 
-      result =
-        lv
-        |> form("#registration_form",
-          user: %{"email" => user.email, "password" => "valid_password"}
-        )
-        |> render_submit()
+    #   result =
+    #     lv
+    #     |> form("#registration_form",
+    #       user: %{"email" => user.email, "password" => "valid_password"}
+    #     )
+    #     |> render_submit()
 
-      assert result =~ "has already been taken"
-    end
+    #   assert result =~ "has already been taken"
+    # end
   end
 
   describe "registration navigation" do

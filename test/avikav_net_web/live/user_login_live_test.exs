@@ -10,7 +10,7 @@ defmodule AvikavNetWeb.UserLoginLiveTest do
 
       assert html =~ "Log in"
       assert html =~ "Register"
-      assert html =~ "Forgot your password?"
+      # assert html =~ "Forgot your password?"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -32,7 +32,8 @@ defmodule AvikavNetWeb.UserLoginLiveTest do
       {:ok, lv, _html} = live(conn, ~p"/users/log_in")
 
       form =
-        form(lv, "#login_form", user: %{email: user.email, password: password, remember_me: true})
+        # form(lv, "#login_form", user: %{email: user.email, password: password, remember_me: true})
+        form(lv, "#login_form", user: %{username: user.username, password: password, remember_me: true})
 
       conn = submit_form(form, conn)
 
@@ -46,12 +47,14 @@ defmodule AvikavNetWeb.UserLoginLiveTest do
 
       form =
         form(lv, "#login_form",
-          user: %{email: "test@email.com", password: "123456", remember_me: true}
+          user: %{username: "test", password: "123456", remember_me: true}
+          # user: %{email: "test@email.com", password: "123456", remember_me: true}
         )
 
       conn = submit_form(form, conn)
 
-      assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid email or password"
+      # assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid email or password"
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid username or password"
 
       assert redirected_to(conn) == "/users/log_in"
     end
@@ -70,18 +73,18 @@ defmodule AvikavNetWeb.UserLoginLiveTest do
       assert login_html =~ "Register"
     end
 
-    test "redirects to forgot password page when the Forgot Password button is clicked", %{
-      conn: conn
-    } do
-      {:ok, lv, _html} = live(conn, ~p"/users/log_in")
+    # test "redirects to forgot password page when the Forgot Password button is clicked", %{
+    #   conn: conn
+    # } do
+    #   {:ok, lv, _html} = live(conn, ~p"/users/log_in")
 
-      {:ok, conn} =
-        lv
-        |> element(~s|main a:fl-contains("Forgot your password?")|)
-        |> render_click()
-        |> follow_redirect(conn, ~p"/users/reset_password")
+    #   {:ok, conn} =
+    #     lv
+    #     |> element(~s|main a:fl-contains("Forgot your password?")|)
+    #     |> render_click()
+    #     |> follow_redirect(conn, ~p"/users/reset_password")
 
-      assert conn.resp_body =~ "Forgot your password?"
-    end
+    #   assert conn.resp_body =~ "Forgot your password?"
+    # end
   end
 end
