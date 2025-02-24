@@ -10,13 +10,13 @@ kill_signal = 'SIGTERM'
 [build]
 
 [env]
-  DATABASE_PATH = '/mnt/database/avikav-net.db'
+  DATABASE_PATH = '/litefs/avikav-net.db'
   PHX_HOST = 'avikav.net'
-  PORT = '8080'
+  PORT = '8081'
 
 [[mounts]]
   source = 'name'
-  destination = '/mnt/database'
+  destination = '/mnt/vol'
   auto_extend_size_threshold = 80
   auto_extend_size_increment = '1GB'
   auto_extend_size_limit = '1GB'
