@@ -58,12 +58,14 @@ defmodule AvikavNetWeb.UserSettingsLive do
           <.input field={@password_form[:password]} type="password" label="New password" required />
           <.input
             field={@password_form[:password_confirmation]}
+            autocomplete="new-password"
             type="password"
             label="Confirm new password"
           />
           <.input
             field={@password_form[:current_password]}
             name="current_password"
+            autocomplete="current-password"
             type="password"
             label="Current password"
             id="current_password_for_password"
