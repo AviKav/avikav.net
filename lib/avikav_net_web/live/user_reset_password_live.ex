@@ -18,9 +18,16 @@ defmodule AvikavNetWeb.UserResetPasswordLive do
           Oops, something went wrong! Please check the errors below.
         </.error>
 
-        <.input field={@form[:password]} type="password" label="New password" required />
+        <.input
+          field={@form[:password]}
+          autocomplete="new-password"
+          type="password"
+          label="New password"
+          required
+        />
         <.input
           field={@form[:password_confirmation]}
+          autocomplete="new-password"
           type="password"
           label="Confirm new password"
           required
