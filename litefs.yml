@@ -5,6 +5,10 @@
 fuse:
   dir: "/litefs"
 
+  # Enable mounting of the file system by non-root users.
+  # You must enable the 'user_allow_other' option in /etc/fuse.conf as well.
+  allow-other: true
+
 # The data section describes settings for the internal LiteFS storage. We'll
 # mount a volume to the data directory so it can be persisted across restarts.
 # However, this data should not be accessed directly by the user application.
@@ -37,11 +41,11 @@ proxy:
 # last command exits, LiteFS is shut down.
 exec:
   # Only run migrations on candidate nodes.
-  - cmd: "/app/bin/migrate"
+  - cmd: "su nobody -s /bin/bash /app/bin/migrate"
     if-candidate: true
 
   # Then run the application server on all nodes.
-  - cmd: "/app/bin/server"
+  - cmd: "su nobody -s /bin/bash /app/bin/server"
 
 lease:
   type: "consul"
