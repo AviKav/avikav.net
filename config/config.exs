@@ -52,7 +52,11 @@ config :logger, :console,
 config :avikav_net, :logger, [
   {:handler, :avikav_net_sentry_handler, Sentry.LoggerHandler,
    %{
-     config: %{metadata: [:file, :line]}
+     config: %{
+       metadata: [:file, :line],
+       capture_log_messages: true,
+       level: :error
+     }
    }}
 ]
 
