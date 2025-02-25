@@ -7,7 +7,7 @@ defmodule AvikavNetWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_avikav_net_key",
+    key: "__Host-avikav_net_key",
     signing_salt: "053HLGua",
     same_site: "Lax"
   ]
