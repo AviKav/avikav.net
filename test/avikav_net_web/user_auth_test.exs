@@ -6,7 +6,7 @@ defmodule AvikavNetWeb.UserAuthTest do
   alias AvikavNetWeb.UserAuth
   import AvikavNet.AccountsFixtures
 
-  @remember_me_cookie "_avikav_net_web_user_remember_me"
+  @remember_me_cookie AvikavNetWeb.cookie_name_transform("web_user_remember_me")
 
   setup %{conn: conn} do
     conn =

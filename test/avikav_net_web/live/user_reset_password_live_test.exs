@@ -2,20 +2,20 @@ defmodule AvikavNetWeb.UserResetPasswordLiveTest do
   use AvikavNetWeb.ConnCase
 
   # import Phoenix.LiveViewTest
-  import AvikavNet.AccountsFixtures
+  # import AvikavNet.AccountsFixtures
 
-  alias AvikavNet.Accounts
+  # alias AvikavNet.Accounts
 
-  setup do
-    user = user_fixture()
+  # setup do
+  #   user = user_fixture()
 
-    token =
-      extract_user_token(fn url ->
-        Accounts.deliver_user_reset_password_instructions(user, url)
-      end)
+  #   token =
+  #     extract_user_token(fn url ->
+  #       Accounts.deliver_user_reset_password_instructions(user, url)
+  #     end)
 
-    %{token: token, user: user}
-  end
+  #   %{token: token, user: user}
+  # end
 
   # describe "Reset password page" do
   #   test "renders reset password with valid token", %{conn: conn, token: token} do

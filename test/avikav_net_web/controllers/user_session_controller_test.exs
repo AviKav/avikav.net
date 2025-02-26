@@ -38,7 +38,7 @@ defmodule AvikavNetWeb.UserSessionControllerTest do
           }
         })
 
-      assert conn.resp_cookies["_avikav_net_web_user_remember_me"]
+      assert conn.resp_cookies[AvikavNetWeb.cookie_name_transform("web_user_remember_me")]
       assert redirected_to(conn) == ~p"/"
     end
 

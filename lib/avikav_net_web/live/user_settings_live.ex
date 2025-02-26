@@ -81,15 +81,16 @@ defmodule AvikavNetWeb.UserSettingsLive do
     """
   end
 
-  def mount(%{"token" => token}, _session, socket) do
-    socket =
-      case Accounts.update_user_email(socket.assigns.current_user, token) do
-        :ok ->
-          put_flash(socket, :info, "Email changed successfully.")
+  def mount(%{"token" => _token}, _session, socket) do
+    raise "Email change stub"
+    # socket =
+    #   case Accounts.update_user_email(socket.assigns.current_user, token) do
+    #     :ok ->
+    #       put_flash(socket, :info, "Email changed successfully.")
 
-        :error ->
-          put_flash(socket, :error, "Email change link is invalid or it has expired.")
-      end
+    #     :error ->
+    #       put_flash(socket, :error, "Email change link is invalid or it has expired.")
+    #   end
 
     {:ok, push_navigate(socket, to: ~p"/users/settings")}
   end
