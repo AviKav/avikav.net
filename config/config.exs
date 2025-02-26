@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :avikav_net, AvikavNetWeb.Endpoint, cookie_prefix: "__Host-_avikav_net_"
+
 config :avikav_net,
   ecto_repos: [AvikavNet.Repo],
   generators: [timestamp_type: :utc_datetime]

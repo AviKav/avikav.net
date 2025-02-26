@@ -1,13 +1,14 @@
 defmodule AvikavNetWeb.Endpoint do
   use Sentry.PlugCapture
   use Phoenix.Endpoint, otp_app: :avikav_net
+  require AvikavNetWeb
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "__Host-avikav_net_key",
+    key: AvikavNetWeb.cookie_name_transform("key"),
     signing_salt: "053HLGua",
     same_site: "Lax"
   ]

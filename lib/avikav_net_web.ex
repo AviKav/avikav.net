@@ -108,6 +108,10 @@ defmodule AvikavNetWeb do
     end
   end
 
+  defmacro cookie_name_transform(name) do
+    Application.get_env(:avikav_net, AvikavNetWeb.Endpoint)[:cookie_prefix] <> name
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/live_view/etc.
   """
